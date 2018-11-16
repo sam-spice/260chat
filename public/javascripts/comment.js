@@ -1,30 +1,27 @@
-angular.module('comment', [])
+angular.module('messenger', [])
     .controller('MainCtrl', [
         '$scope', '$http',
         function($scope, $http) {
-            $scope.comments = [];
+            $scope.messages = [];
             $scope.addComment = function() {
-                var newcomment = { userName: $scope.userName, body: $scope.messageBody, date: Date.now() };
+                var d = new Date();
+                var n = d.toTimeString();
+                var new_time = n.substring(0, 8);
+                var newcomment = { userName: $scope.userName, body: $scope.messageBody, date: new_time };
                 $http.post('/sendmessage', newcomment).success(function(data) {
-                    $scope.comments.push(data);
+                    $scope.messages.push(data);
                 });
                 $scope.formContent = '';
             };
-
-            $scope.getDisplayValue = function(currentValue) {
-                console.log(currentValue);
-                
-                var to_return = Date.parse(currentValue);
-                
-                var dummy =  to_return.toTimeString();
-                console.log(dummy);
-                return to_return;
-            };
             $scope.getAll = function() {
                 return $http.get('/getmessages').success(function(data) {
-                    angular.copy(data, $scope.comments);
+                    angular.copy(data, $scope.messages);
                 });
             };
-            $scope.getAll();
+
+            (function() {
+               $scope.getAll();
+                setTimeout(arguments.callee, 250);
+            })();
         }
     ]);
