@@ -1,0 +1,30 @@
+<html>
+<head>
+  <title>Comments</title>
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
+  <script src="javascripts/comment.js"></script>
+
+</head>
+<body ng-app="comment" ng-controller="MainCtrl">
+<div class="row">
+<div class="col-md-6 col-md-offset-3">
+<div class="page-header"> 
+  <h1>Comments </h1>
+</div>
+
+  <form ng-submit="addComment()" style = "margin-top30px;">
+    <input type="text" ng-model="userName"></input>
+    <input type="text" ng-model="messageBody"></input>
+    <button type="submit">Send</button>
+  </form>
+  <div>
+    {{test}}
+  </div>
+  <div ng-repeat="comment in comments | orderBy: 'date'">
+    {{comment.userName }}: {{comment.body}} - date: {{getDisplayValue(comment.date)}}
+  </div>
+</div>
+</div>
+</body>
+</html>
