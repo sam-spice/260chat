@@ -1,7 +1,7 @@
 <html>
 
 <head>
-  <title>Comments</title>
+  <title>Spicy Chat</title>
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
   <script src="javascripts/comment.js"></script>
@@ -18,8 +18,8 @@
       </div>
 
       <form ng-submit="addComment()" style="margin-top30px;">
-        <input type="text" ng-model="userName"></input>
-        <input type="text" ng-model="messageBody"></input>
+        <input type="text" ng-model="userName" placeholder="Username"></input>
+        <input type="text" ng-model="messageBody" placeholder="Message"></input>
         <button type="submit">Send</button>
       </form>
       <div ng-repeat="message in messages | orderBy: 'date'">
